@@ -16,16 +16,17 @@ def ner(contents, segment='senior'):
     """"""
     url = ner_url % (host, segment)
     enable = {
-            "NameRecognize": True,
-            "PlaceRecognize": False,
-            "OrganizationRecognize": False,
-            "CustomDictionary": False,
-            "TranslatedNameRecognize": False,
-            "JapaneseNameRecognize": False,
-        }
+        "NameRecognize": True,
+        "PlaceRecognize": False,
+        "OrganizationRecognize": False,
+        "CustomDictionary": False,
+        "TranslatedNameRecognize": False,
+        "JapaneseNameRecognize": False,
+        "AllNamedEntityRecognize": True,
+    }
     body = {
         'contents': contents,
-        #'enable': enable,
+        'enable': enable,
     }
     resp = requests.post(url, json=body).json()
     return resp['data']
@@ -41,7 +42,8 @@ if __name__ == '__main__':
             contents.append(html_clear.sub("", content))
 
     start = time()
-    resp = ner(contents, segment="nshort")
+    #resp = ner(contents, segment="nshort")
+    resp = ner(contents, segment="senior")
     print("time: %.3f" % (time() - start))
 
     names = {}
