@@ -47,7 +47,7 @@ def ner_dict():
             w = w.strip()
             if len(w) == 0:
                 continue
-            words.append([w, 'nr', 1000*len(w)])
+            words.append([w, 'nr', 1000000*len(w)])
     resp = requests.post(url, json={"words": words}).json()
     return resp
 
